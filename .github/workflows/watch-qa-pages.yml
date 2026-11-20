@@ -1,0 +1,52 @@
+name: Publish isolated Watch QA
+on:
+  push:
+    branches: [qa-pages]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: watch-qa-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.repository == 'Shayan-Kazeyami/aerial-watch-qa' && github.ref == 'refs/heads/qa-pages'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get reviewed QA inputs
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Get pinned public Watch assets
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: Shayan-Kazeyami/aerial-watch
+          ref: 5d9647a456e8408e11fefb0051e7d787d752c914
+          path: public-baseline
+          persist-credentials: false
+          sparse-checkout: preview-b/releases
+      - name: Build hash-verified QA site
+        shell: bash
+        run: |
+          set -e
+          for file in qa-build/modules/*.js; do
+            cp -- "$file" public-baseline/preview-b/releases/efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3/
+          done
+          python3 -B qa-build/build.py public-baseline pages-output
+      - name: Upload only verified QA browser files
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: pages-output
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy only to this QA repository
+        id: deploy
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b9c1f9a8d732dee3e992cc

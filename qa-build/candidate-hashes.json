@@ -1,0 +1,32 @@
+{
+  "status": "detached unsealed QA candidate, not release efb9c41b",
+  "baseCommit": "5d9647a456e8408e11fefb0051e7d787d752c914",
+  "baseRelease": "efb9c41b5a3531812fb64b960841c35d98cfe75799bd7bb774e852527cc029b3",
+  "changedModules": [
+    {
+      "path": "assembly-crown-hotspot.js",
+      "sha256": "fa989a85d0e4ab955f6ec9a9183b81897f7a78c0e2b8f0344f73fe3036b71c20",
+      "bytes": 10939
+    },
+    {
+      "path": "assembly-loading.js",
+      "sha256": "6bdd3eee888671402ecd7c200259d1cdd73aba20f61c913546bf0d64943c7fd4",
+      "bytes": 6642
+    },
+    {
+      "path": "assembly-review.js",
+      "sha256": "94e2f48744c5bc3fc5f6db71573d76e8d50e1523d5fb55492035bf4a6f48cf30",
+      "bytes": 137313
+    },
+    {
+      "path": "atelier-renderer-tools.js",
+      "sha256": "4879d074edda6575cc6b399d7cdf4536abb77a62acf8804f287c09134a7c2407",
+      "bytes": 7293
+    },
+    {
+      "path": "atelier-preview.js",
+      "sha256": "d00ce6551183d8374dbc6880ca855d0e4a38a6a072fa9653cd4dc19c8e66f50d",
+      "bytes": 47842
+    }
+  ]
+}
