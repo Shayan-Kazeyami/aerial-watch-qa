@@ -49,4 +49,4 @@ jobs:
     steps:
       - name: Deploy only to this QA repository
         id: deploy
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b9c1f9a8d732dee3e992cc
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
